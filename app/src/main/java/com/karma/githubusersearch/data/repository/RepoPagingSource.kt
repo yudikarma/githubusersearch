@@ -18,7 +18,7 @@ class RepoPagingSource(
         val position = params.key ?: START_PAGE_INDEX
         return try {
             val apiResponse =
-                searchApi.getSearchResponse(query, position, params.loadSize)
+                searchApi.getSearchUserPaging(query, position, params.loadSize)
             val repos = apiResponse.items
 
             LoadResult.Page(

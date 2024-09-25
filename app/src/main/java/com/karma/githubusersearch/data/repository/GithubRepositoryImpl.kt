@@ -2,6 +2,7 @@ package com.karma.githubusersearch.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.karma.githubusersearch.data.local.UserDao
 import com.karma.githubusersearch.data.remote.GitHubApiService
@@ -22,17 +23,16 @@ class GithubRepositoryImpl @Inject constructor(
     private val networkService: GitHubApiService,
     private val dao: UserDao
 ) : GithubRepository {
-    private val apiClient = GithubClient.retrofitClient()
 
-//    fun getSearchResult(query: String?) =
-//        Pager(
-//            config = PagingConfig(
-//                pageSize = 10,
-//                maxSize = 30,
-//                enablePlaceholders = false
-//            ),
-//            pagingSourceFactory = { RepoPagingSource(networkService, query) }
-//        ).liveData
+    /*override suspend fun getUserFromApiPaging(query: String?) =
+        Pager(
+            config = PagingConfig(
+                pageSize = 10,
+                maxSize = 30,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { RepoPagingSource(networkService, query) }
+        ).liveData*/
 
     override suspend fun getUserFromApi(username: String): Flow<ResultState<List<User>>> {
         return flow {
@@ -44,6 +44,23 @@ class GithubRepositoryImpl @Inject constructor(
                 }
                 emit(ResultState.Success(dataMaped))
             } catch (e: Exception) {
+                emit(ResultState.Error(e.toString(), 500))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getUserFromApiPaging(username: String): Flow<ResultState<PagingData<User>>> {
+        return flow {
+            try {
+                Pager(
+                    config = PagingConfig(
+                        pageSize = 10,
+                        maxSize = 30,
+                        enablePlaceholders = false
+                    ),
+                    pagingSourceFactory = { RepoPagingSource(networkService, username) }
+                ).liveData
+            }catch (e: Exception) {
                 emit(ResultState.Error(e.toString(), 500))
             }
         }.flowOn(Dispatchers.IO)

@@ -1,5 +1,6 @@
 package com.karma.githubusersearch.presentation.domain.usecase
 
+import androidx.paging.PagingData
 import com.karma.githubusersearch.presentation.domain.model.User
 import com.karma.githubusersearch.presentation.domain.model.UserDetail
 import com.karma.githubusersearch.presentation.domain.repository.GithubRepository
@@ -9,6 +10,7 @@ import javax.inject.Inject
 
 class GithubUseCaseImpl @Inject constructor(private val githubRepository: GithubRepository) :GithubUseCase {
     override suspend fun getUserFromApi(username: String): Flow<ResultState<List<User>>> = githubRepository.getUserFromApi(username)
+    override suspend fun getUserFromApiPaging(username: String): Flow<ResultState<PagingData<User>>> = githubRepository.getUserFromApiPaging(username)
 
     override suspend fun getUserDetailFromApi(username: String): Flow<ResultState<UserDetail>> = githubRepository.getDetailUserFromApi(username)
 

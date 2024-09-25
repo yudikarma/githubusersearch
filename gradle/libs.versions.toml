@@ -11,11 +11,13 @@ activity = "1.9.2"
 constraintlayout = "2.1.4"
 retrofit= "2.9.0"
 converterGson = "2.9.0"
-hiltAndroid = "2.35"
+hiltAndroid = "2.48"
 room = "2.4.0"
 coroutinesAdapter = "0.9.2"
 loggingInterceptor = "4.8.0"
 pagination = "3.1.1"
+viewModelExtension = "2.2.0"
+viewModelKtx = "2.5.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -30,14 +32,21 @@ converterGson = { group = "com.squareup.retrofit2", name = "converter-gson", ver
 coroutinesAdapter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlin-coroutines-adapter", version.ref = "coroutinesAdapter" }
 loggingInterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptor" }
 hiltAndroid = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
-hiltCompiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltAndroid" }
+hiltAndroidCompiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltAndroid" }
+hiltCompiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltAndroid" }
 room = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+roomRuntime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 roomCompiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 pagingRuntime = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "pagination" }
 pagingCommon = { group = "androidx.paging", name = "paging-common-ktx", version.ref = "pagination" }
+viewModelExt = { group = "androidx.lifecycle", name = "lifecycle-extensions", version.ref = "viewModelExtension" }
+viewModelKtx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "viewModelKtx" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+dagger-hilt = { id = "com.google.dagger.hilt.android", version = "hiltAndroid" }
+
 
